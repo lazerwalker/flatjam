@@ -15,6 +15,38 @@ var position = {
   y: 0
 };
 
+// Set up keyboard event handlers
+var Directions = [
+  { keyCode: 37,  name: "left", x: -0.25, y: 0 },
+  { keyCode: 39, name: "right", x: 0.25, y: 0 },
+  { keyCode: 38, name: "up", x: 0, y: -0.25 },
+  { keyCode: 40, name: "down", x: 0, y: 0.25 }
+]
+
+window.addEventListener('keyup', function(e) {
+  var direction = Directions.filter(function(d) {
+    return d.keyCode === e.keyCode
+  })[0];
+
+  if (direction) {
+    direction.pressed = false;
+  }
+});
+
+window.addEventListener('keydown',  function(e) {
+  console.log(e.keyCode)
+
+  var direction = Directions.filter(function(d) {
+    console.log(d.keyCode)
+    return d.keyCode === e.keyCode
+  })[0];
+
+  if (direction) {
+    console.log("Pressed " + direction.name)
+    direction.pressed = true;
+  }
+});
+
 
 // Render the new position
 function setPosition(pos, image) {
@@ -28,8 +60,17 @@ function setPosition(pos, image) {
 }
 
 
+// Main game loop
 setInterval(function() {
-  position.x += 0.25
-  position.y += 0.25
+  position.x += 0
+  position.y += 1
+
+  Directions.forEach(function(d) {
+    if (d.pressed) {
+      position.x += d.x;
+      position.y += d.y;
+    };
+  })
+
   setPosition(position, canvas)
 }, 33) /* 1000/30, or 30fps  */;
