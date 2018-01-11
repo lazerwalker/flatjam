@@ -27,13 +27,6 @@ var scale = 1.0
 setupStartingPosition();
 setupKeyboardHandling();
 
-function clampPosToVectorFieldCoords(pos, size) {
-  return {
-    x: pos % size,
-    y: pos % size
-  }
-}
-
 function setupStartingPosition() {
   var canvasStyle = window.getComputedStyle(canvas)
   var playerStyle = window.getComputedStyle(player)
