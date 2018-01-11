@@ -4,7 +4,8 @@ var ctx = document.getElementById("canvas").getContext('2d')
 
 var PLAYER_CONTROL_POWER = 0.03;
 var VECTOR_FIELD_POWER = 0.1;
-
+var TURBO_MODE = true;
+var FRICTION = 0.9;
 var CELL_SIZE = 50;
 
 var position,
@@ -91,28 +92,31 @@ function render() {
 
 // Main game loop
 setInterval(function() {
-  var vectorFieldPos = {
-    col: Math.floor(position.x / CELL_SIZE),
-    row: Math.floor(position.y / CELL_SIZE)
+  var numExecutions = TURBO_MODE ? 20 : 1;
+  for (var i = 0; i < numExecutions; i++) {
+    var vectorFieldPos = {
+      col: Math.floor(position.x / CELL_SIZE),
+      row: Math.floor(position.y / CELL_SIZE)
+    }
+
+    var vector = vectors[vectorFieldPos.col][vectorFieldPos.row];
+
+    velocity.x += vector.x * vector.mag * VECTOR_FIELD_POWER;
+    velocity.y += vector.y * vector.mag * VECTOR_FIELD_POWER;
+
+    Directions.forEach(function(d) {
+      if (d.pressed) {
+        velocity.x += d.x * PLAYER_CONTROL_POWER;
+        velocity.y += d.y * PLAYER_CONTROL_POWER;
+      };
+    })
+
+    velocity.x *= FRICTION;
+    velocity.y *= FRICTION;
+
+    position.x += velocity.x;
+    position.y += velocity.y;
   }
-
-  var vector = vectors[vectorFieldPos.col][vectorFieldPos.row];
-
-  velocity.x += vector.x * vector.mag * VECTOR_FIELD_POWER;
-  velocity.y += vector.y * vector.mag * VECTOR_FIELD_POWER;
-
-  Directions.forEach(function(d) {
-    if (d.pressed) {
-      velocity.x += d.x * PLAYER_CONTROL_POWER;
-      velocity.y += d.y * PLAYER_CONTROL_POWER;
-    };
-  })
-
-  velocity.x *= 0.9;
-  velocity.y *= 0.9;
-
-  position.x += velocity.x;
-  position.y += velocity.y;
 
   render()
 }, 33) /* 1000/30, or 30fps  */;
