@@ -3,7 +3,7 @@ var player = document.getElementById("player");
 
 var position, playerOffset;
 
-var directions = [
+var Directions = [
   { keyCode: 37,  name: "left", x: -0.25, y: 0 },
   { keyCode: 39, name: "right", x: 0.25, y: 0 },
   { keyCode: 38, name: "up", x: 0, y: -0.25 },
