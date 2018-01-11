@@ -6,6 +6,21 @@ var PLAYER_CONTROL_POWER = 0.03;
 var VECTOR_FIELD_POWER = 0.1;
 var TURBO_MODE = true;
 var FRICTION = 0.9;
+
+var topX = 0;
+
+var LEFT_EXIT_X = {
+  min: 1190,
+  max: 1460
+}
+
+var RIGHT_EXIT_X = {
+  min: 2010,
+  max: 2365
+}
+
+var ENTRANCE_X_MIN = 630;
+
 var CELL_SIZE = 50;
 
 var position,
@@ -79,12 +94,27 @@ function render() {
   }
 
 	ctx.clearRect(0, 0, canvasWidth, canvasHeight)
+
   ctx.drawImage(map, renderPos.x, renderPos.y, canvasWidth, canvasHeight, 0, 0, canvasWidth, canvasHeight)
   ctx.drawImage(player, playerOffset.x, playerOffset.y)
 }
 
 // Main game loop
 setInterval(function() {
+  if (position.y < 0) {
+    var diff;
+    if (position.x < RIGHT_EXIT_X.min) {
+      diff = Math.min(position.x - LEFT_EXIT_X.min, LEFT_EXIT_X.max - LEFT_EXIT_X.min)
+    } else {
+      diff = Math.min(position.x - RIGHT_EXIT_X.min, RIGHT_EXIT_X.max - RIGHT_EXIT_X.min)
+    }
+
+    position = {
+      x: 630 + diff,
+      y: map.height - player.height
+    }
+  }
+
   var numExecutions = TURBO_MODE ? 20 : 1;
   for (var i = 0; i < numExecutions; i++) {
     var vectorFieldPos = {
@@ -110,6 +140,5 @@ setInterval(function() {
     position.x += velocity.x;
     position.y += velocity.y;
   }
-
   render()
 }, 33) /* 1000/30, or 30fps  */;
