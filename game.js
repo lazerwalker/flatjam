@@ -2,8 +2,8 @@ var map = document.getElementById("map")
 var player = document.getElementById("player")
 var ctx = document.getElementById("canvas").getContext('2d')
 
-var PLAYER_CONTROL_POWER = 0.03;
-var VECTOR_FIELD_POWER = 0.1;
+var PLAYER_CONTROL_POWER = 0.1;
+var VECTOR_FIELD_POWER = 0;
 var TURBO_MODE = true;
 var FRICTION = 0.9;
 
@@ -95,6 +95,19 @@ function render() {
 
 	ctx.clearRect(0, 0, canvasWidth, canvasHeight)
 
+  if (renderPos.y < 0) {
+    var leftBorder;
+    if (position.x < RIGHT_EXIT_X.min) {
+      leftBorder = LEFT_EXIT_X.min;
+    } else {
+      leftBorder = RIGHT_EXIT_X.min;
+    }
+
+    var xOffset = leftBorder - renderPos.x
+
+    ctx.drawImage(map, ENTRANCE_X_MIN - 30, map.height + renderPos.y, canvasWidth, canvasHeight, xOffset, 0, canvasWidth, canvasHeight)
+  }
+
   ctx.drawImage(map, renderPos.x, renderPos.y, canvasWidth, canvasHeight, 0, 0, canvasWidth, canvasHeight)
   ctx.drawImage(player, playerOffset.x, playerOffset.y)
 }
@@ -140,5 +153,8 @@ setInterval(function() {
     position.x += velocity.x;
     position.y += velocity.y;
   }
+
+  console.log(position)
+
   render()
 }, 33) /* 1000/30, or 30fps  */;
