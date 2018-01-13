@@ -2,9 +2,9 @@ var map = document.getElementById("map")
 var player = document.getElementById("player")
 var ctx = document.getElementById("canvas").getContext('2d')
 
-var PLAYER_CONTROL_POWER = 0.1;
-var VECTOR_FIELD_POWER = 0;
-var TURBO_MODE = true;
+var PLAYER_CONTROL_POWER = 0.03;
+var VECTOR_FIELD_POWER = 0.1;
+var TURBO_MODE = false;
 var FRICTION = 0.9;
 
 var topX = 0;
