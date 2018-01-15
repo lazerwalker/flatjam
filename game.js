@@ -154,7 +154,5 @@ setInterval(function() {
     position.y += velocity.y;
   }
 
-  console.log(position)
-
   render()
 }, 33) /* 1000/30, or 30fps  */;
