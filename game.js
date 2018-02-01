@@ -31,10 +31,10 @@ var position,
   canvasHeight;
 
 var Directions = [
-  { keyCode: 37,  name: "left", x: -1, y: 0 },
-  { keyCode: 39, name: "right", x: 1, y: 0 },
-  { keyCode: 38, name: "up", x: 0, y: -1 },
-  { keyCode: 40, name: "down", x: 0, y: 1 }
+  { keyCode: 65,  name: "left", x: -1, y: 0 },
+  { keyCode: 68, name: "right", x: 1, y: 0 },
+  { keyCode: 87, name: "up", x: 0, y: -1 },
+  { keyCode: 83, name: "down", x: 0, y: 1 }
 ]
 
 var scale = 1.0
