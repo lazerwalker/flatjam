@@ -1,0 +1,22 @@
+{
+  "name": "flatjam",
+  "version": "1.0.0",
+  "description": "Let your worries float away as you go for a lazy ride down our nice lil river.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lazerwalker/flatjam.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lazerwalker/flatjam/issues"
+  },
+  "homepage": "https://github.com/lazerwalker/flatjam#readme",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}

@@ -1,15 +1,14 @@
-#game {
-  border: 1px solid red;
-  position: absolute;
-  width: 800px;
-  height: 600px;
+body {
+  overflow: hidden;
+}
 
-  background-image: url('./tubing-map.jpg');
-  background-position: 700 500;
+#game {
+  position: absolute;
+  width: 700px;
+  height: 500px;
 }
 
 #player {
-  background-image: url('./tube.png');
   height: 48px;
   left: 50%;
   top: 50%;
